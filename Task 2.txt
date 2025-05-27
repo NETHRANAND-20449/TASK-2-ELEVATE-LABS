@@ -1,0 +1,89 @@
+Task 2
+Analyze a Phishing Email Sample
+
+**Student Name:** NETHRANAND MALIGE  
+**Course:** CYBER SECURITY INTERNSHIP 
+**Assignment:** Task 2 - Phishing Email Analysis  
+**Date:** May 27, 2025  
+
+## What I Learned
+
+Through this phishing email analysis, I gained practical experience in email security assessment and threat detection. I learned how to interpret email authentication protocols (DMARC, SPF, DKIM) and understand their role in preventing email spoofing. The analysis taught me to identify key indicators of malicious emails by examining header information, relay paths, and authentication failures. I also learned how social engineering tactics are employed in phishing attacks and how technical security measures can help detect and prevent such threats.
+
+## Security Observations
+### Please refer to the image(TASK2.png).
+### Email Authentication Analysis
+- **DMARC Status:** Compliant ✅
+- **SPF Alignment:** Failed ❌ (Critical Security Issue)
+- **SPF Authentication:** Passed ✅
+- **DKIM Alignment:** Passed ✅
+- **DKIM Authentication:** Passed ✅
+
+### Relay Path Analysis
+The email routing shows:
+- **Origin:** hw157.conectoomail.ro (89.35.35.157)
+- **Destination:** mx.google.com
+- **Relay Delay:** 1 second between hops
+- **Timestamps:** 5/6/2025 3:10:39 PM to 3:10:40 PM (UTC)
+
+### Potential Risks Found
+
+1. **SPF Alignment Failure (HIGH RISK)**
+   - The SPF alignment check failed, indicating the "From" domain may not match the actual sending domain
+   - This is a primary indicator of email spoofing attempts
+   - Suggests potential domain impersonation
+
+2. **Suspicious Origin Server**
+   - Email originated from "conectomail.ro" domain
+   - Romanian hosting service that could be used for malicious purposes
+   - IP address 89.35.35.157 should be verified against threat intelligence databases
+
+3. **Mixed Authentication Results**
+   - While DKIM passed, the SPF alignment failure creates inconsistency
+   - This pattern is common in sophisticated phishing attempts that partially bypass security measures
+
+4. **Rapid Relay Processing**
+   - 1-second delay between hops may indicate automated/bulk email processing
+   - Could suggest mass distribution typical of phishing campaigns
+
+### Recommendations
+
+**Immediate Actions:**
+1. **Do not interact** with any links or attachments in this email
+2. **Verify sender identity** through alternative communication channels
+3. **Report the email** to your organization's security team
+4. **Delete the email** after documentation
+
+**Technical Recommendations:**
+1. **Implement stricter DMARC policies** to quarantine/reject emails with SPF alignment failures
+2. **Configure email filters** to flag emails from suspicious Romanian domains
+3. **Enable advanced threat protection** features in email security systems
+4. **Conduct user training** on identifying phishing indicators
+
+**Monitoring Actions:**
+1. **Blacklist the IP** 89.35.35.157 if confirmed malicious
+2. **Monitor for similar patterns** from conectomail.ro domain
+3. **Review email security policies** for SPF alignment requirements
+4. **Implement additional header analysis** for Romanian hosting services
+
+## Problems I Faced
+
+During this analysis, I encountered several challenges:
+
+1. **Limited Email Content:** The screenshot only shows authentication headers and relay information, making it difficult to analyze the actual email body content and subject line for social engineering tactics.
+
+2. **Incomplete Header Information:** Some critical header fields like Message-ID, Reply-To, and full routing path were not visible, limiting the depth of technical analysis.
+
+3. **Threat Intelligence Correlation:** Without access to real-time threat intelligence databases, I couldn't verify if the source IP or domain is associated with known malicious activities.
+
+4. **Time Zone Confusion:** The timestamps required careful analysis to understand the actual email flow timing and detect any anomalies in delivery patterns.
+
+## Conclusion
+
+This email sample exhibits significant phishing characteristics, primarily the SPF alignment failure combined with an origin from a potentially suspicious Romanian hosting service. While some authentication mechanisms (DKIM, basic SPF) passed, the alignment failure is a critical red flag indicating possible email spoofing or domain impersonation.
+
+The technical analysis reveals a mixed security posture where the email partially bypasses security controls, which is characteristic of sophisticated phishing attempts. The rapid processing time and specific routing path through conectomail.ro further support the assessment that this is likely a malicious email.
+
+**Risk Level: HIGH** - This email should be treated as a potential phishing attempt and handled according to security protocols. The SPF alignment failure alone warrants rejection or quarantine under proper email security policies.
+
+This analysis demonstrates the importance of comprehensive email authentication and the need for security awareness training to help users identify potentially malicious emails even when they partially pass automated security checks.
